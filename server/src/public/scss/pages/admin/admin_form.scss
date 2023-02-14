@@ -1,0 +1,10 @@
+#admin-form-container {
+    min-height: 100vh;
+
+    #admin-form {
+        width: 100%;
+        @media(min-width: 768px) {
+            width: 35%;
+        }
+    }
+}

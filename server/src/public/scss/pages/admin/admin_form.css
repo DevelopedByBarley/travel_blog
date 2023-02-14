@@ -1,0 +1,11 @@
+#admin-form-container {
+  min-height: 100vh;
+}
+#admin-form-container #admin-form {
+  width: 100%;
+}
+@media (min-width: 768px) {
+  #admin-form-container #admin-form {
+    width: 35%;
+  }
+}/*# sourceMappingURL=admin_form.css.map */

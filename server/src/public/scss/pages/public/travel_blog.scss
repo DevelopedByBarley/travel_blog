@@ -1,0 +1,54 @@
+.header {
+  min-height: 70vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: url("../../public/images/header_background.png") center center;
+  background-size: cover;
+
+  .profile-image {
+    height: 140px;
+    width: 140px;
+    border: 1px solid;
+    border-radius: 50%;
+    background-color: white;
+    margin: 1rem;
+  }
+
+  .header-content {
+    font-size: 2.5rem;
+    color: white;
+  }
+}
+
+.about-me-container {
+  width: 80%;
+  margin: 0 auto;
+  .about-me {
+    min-height: 50vh;
+  }
+}
+
+.latest-trips-container {
+  .latest-trips-carousel {
+    .carousel {
+      .carousel-inner .carousel-item {
+        height: 500px;
+      }
+    }
+  }
+}
+
+.trips-container {
+  .trips {
+    .card {
+      .card-image {
+        min-height: 250px;
+        background: url("https://via.placeholder.com/150") center center;
+        background-size: cover;
+      }
+    }
+  }
+}
