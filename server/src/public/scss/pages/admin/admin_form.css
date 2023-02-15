@@ -1,3 +1,20 @@
+.login-alert {
+  animation: loginAlertAnimation;
+  animation-duration: 0.4s;
+  animation-fill-mode: forwards;
+  position: fixed;
+  top: 50px;
+  width: 100%;
+}
+
+@keyframes loginAlertAnimation {
+  from {
+    top: -200px;
+  }
+  to {
+    top: 50px;
+  }
+}
 #admin-form-container {
   min-height: 100vh;
 }

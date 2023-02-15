@@ -1,6 +1,5 @@
-
 <?php if (isset($params["isLoginFailed"])) : ?>
-    <div class="alert alert-danger" role="alert">
+    <div class="alert alert-danger login-alert text-center" role="alert">
         Email vagy jelszó nem létezik!
     </div>
 <?php endif ?>
@@ -33,3 +32,4 @@
     </form>
 
 </div>
+

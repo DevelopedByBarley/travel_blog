@@ -15,10 +15,57 @@ function adminHandler()
     echo render("wrapper.php", [
         "content" => render("pages/admin/admin_form.php", [
             "errorMessages" => $errorMessages ?? "",
-            "isLoginFailed" => $_GET["isLoginFailed"] ?? ""
+            "isLoginFailed" => $_GET["isLoginFailed"] ?? null
         ])
     ]);
 }
+
+function adminDashboardHandler()
+{
+    checkIsAdminLoggedInOrRedirect();
+
+    echo render("wrapper.php", [
+        "content" => render("pages/admin/admin_dashboard.php", [])
+    ]);
+}
+
+
+
+function adminTripsHandler() {
+    $pdo = getConnection();
+    $stmt = $pdo->prepare("SELECT * FROM `trips`");
+    $stmt->execute();
+    $trips = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    echo render("wrapper.php", [
+        "content" => render("pages/admin/admin_dashboard.php", [
+            "innerContent" => render("pages/admin/trip_list.php", [
+                "trips" => $trips
+            ])
+        ])
+    ]);
+}
+
+function tripFormHandler() {
+    echo render("wrapper.php", [
+        "content" => render("pages/admin/admin_dashboard.php", [
+            "innerContent" => render("pages/admin/trip_form.php", [])
+        ])
+    ]);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 function adminRegisterHandler()
@@ -77,14 +124,19 @@ function adminLoginHandler()
     header("Location: /admin/dashboard?loginFailed=1");
 }
 
-function adminDashboardHandler()
-{
-    checkIsAdminLoggedInOrRedirect();
 
-    echo render("wrapper.php", [
-        "content" => render("pages/admin/admin_dashboard.php")
-    ]);
+function adminLogoutHandler()
+{
+    session_start();
+    session_destroy();
+
+    $cookieParams = session_get_cookie_params();
+    setcookie(session_name(), "", 0, $cookieParams["path"], $cookieParams["domain"], $cookieParams["secure"], isset($cookieParams["httponly"]));
+
+    header('Location: /');
 }
+
+
 
 
 function isLoggedIn()

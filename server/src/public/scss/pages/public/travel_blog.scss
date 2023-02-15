@@ -1,4 +1,4 @@
-.header {
+#header {
   min-height: 70vh;
   width: 100%;
   display: flex;
@@ -31,7 +31,7 @@
   }
 }
 
-.latest-trips-container {
+#latest-trips-container {
   .latest-trips-carousel {
     .carousel {
       .carousel-inner .carousel-item {
@@ -41,7 +41,7 @@
   }
 }
 
-.trips-container {
+#trips-container {
   position: relative;
   .trips {
     .card {
@@ -59,7 +59,7 @@
   }
 }
 
-.trips-container::before {
+#trips-container::before {
   position: absolute;
   content: "";
   width: 100%;
@@ -70,7 +70,7 @@
   z-index: -1;
 }
 
-.planned-trips-container {
+#bucket-list-container {
   margin-top: 220px;
 
   .planned-trips {

@@ -1,4 +1,4 @@
-.header {
+#header {
   min-height: 70vh;
   width: 100%;
   display: flex;
@@ -8,7 +8,7 @@
   background: url("../../public/images/header_background.jpg") center center;
   background-size: cover;
 }
-.header .profile-image {
+#header .profile-image {
   height: 200px;
   width: 200px;
   border: 1px solid;
@@ -16,7 +16,7 @@
   background-color: white;
   margin: 1rem;
 }
-.header .header-content {
+#header .header-content {
   font-size: 2.5rem;
   color: white;
 }
@@ -29,27 +29,27 @@
   min-height: 50vh;
 }
 
-.latest-trips-container .latest-trips-carousel .carousel .carousel-inner .carousel-item {
+#latest-trips-container .latest-trips-carousel .carousel .carousel-inner .carousel-item {
   height: 500px;
 }
 
-.trips-container {
+#trips-container {
   position: relative;
 }
-.trips-container .trips .card {
+#trips-container .trips .card {
   overflow: hidden;
 }
-.trips-container .trips .card .card-image {
+#trips-container .trips .card .card-image {
   transition: all 0.4s ease-in-out;
   min-height: 250px;
   background: url("https://via.placeholder.com/150") center center;
   background-size: cover;
 }
-.trips-container .trips .card:hover .card-image {
+#trips-container .trips .card:hover .card-image {
   transform: rotate(2deg) scale(1.1);
 }
 
-.trips-container::before {
+#trips-container::before {
   position: absolute;
   content: "";
   width: 100%;
@@ -60,10 +60,10 @@
   z-index: -1;
 }
 
-.planned-trips-container {
+#bucket-list-container {
   margin-top: 220px;
 }
-.planned-trips-container .planned-trips .img-bubble {
+#bucket-list-container .planned-trips .img-bubble {
   height: 150px;
   width: 150px;
   border: 1px solid;

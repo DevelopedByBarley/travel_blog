@@ -11,10 +11,19 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link active" aria-current="page" href="#header">Kezdőlap</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <a class="nav-link" href="#latest-trips-container">Legutóbbi utak</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#trips-container">További utak</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#bucket-list-container">Bakancslista</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#contact-me-container">Kapcsolat</a>
         </li>
       </ul>
       <div class="d-flex">
