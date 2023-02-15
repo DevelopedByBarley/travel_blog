@@ -77,7 +77,7 @@
 
 
 
-<div class="trips-container p-5 bg-dark d-flex flex-column align-items-center justify-content-center" style="min-height: 500px">
+<div class="trips-container container-fluid p-5 bg-dark d-flex flex-column align-items-center justify-content-center" style="min-height: 500px">
     <h1 class="text-light text-center mt-5">Ahová még utaztam.</h1>
     <div class="row mt-5 trips ">
         <div class="col-sm-2 mb-5 d-flex flex-column align-items-center justify-content-center">
@@ -142,4 +142,77 @@
         </div>
     </div>
     <button class="btn btn-outline-info text-light">További utak</button>
+</div>
+
+
+<div class="planned-trips-container container" style="min-height: 500px;">
+    <div class="planned-trips mt-5 row">
+        <h1 class="text-center mt-5 mb-5">Bakancslista</h1>
+        <div class="col-sm-4 d-flex flex-column align-items-center justify-content-center mb-5">
+            <img src="https://via.placeholder.com/150" class="img-bubble" alt="">
+            <div class="content mt-3">
+                <h3>Lorem Ipsum</h3>
+            </div>
+        </div>
+        <div class="col-sm-4 d-flex flex-column align-items-center justify-content-center mb-5">
+            <img src="https://via.placeholder.com/150" class="img-bubble" alt="">
+            <div class="content mt-3">
+                <h3>Lorem Ipsum</h3>
+            </div>
+        </div>
+        <div class="col-sm-4 d-flex flex-column align-items-center justify-content-center mb-5">
+            <img src="https://via.placeholder.com/150" class="img-bubble" alt="">
+            <div class="content mt-3">
+                <h3>Lorem Ipsum</h3>
+            </div>
+        </div>
+        <div class="col-sm-4 d-flex flex-column align-items-center justify-content-center mb-5">
+            <img src="https://via.placeholder.com/150" class="img-bubble" alt="">
+            <div class="content mt-3">
+                <h3>Lorem Ipsum</h3>
+            </div>
+        </div>
+        <div class="col-sm-4 d-flex flex-column align-items-center justify-content-center mb-5">
+            <img src="https://via.placeholder.com/150" class="img-bubble" alt="">
+            <div class="content mt-3">
+                <h3>Lorem Ipsum</h3>
+            </div>
+        </div>
+        <div class="col-sm-4 d-flex flex-column align-items-center justify-content-center mb-5">
+            <img src="https://via.placeholder.com/150" class="img-bubble" alt="">
+            <div class="content mt-3">
+                <h3>Lorem Ipsum</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="contact-me container mt-5 bg-dark text-light p-5">
+    <div class="row">
+        <div class="col-sm-6 content d-flex flex-column align-items-center justify-content-center mb-5">
+            <h1>Ha van egy jó tipped, vedd fel velem a kapcsolatod!</h1>
+        </div>
+        <div class="col-sm-6 form">
+            <form>
+                <!-- Name input -->
+                <div class="form-outline mb-4">
+                    <input type="text" id="form4Example1" class="form-control" placeholder="Név" />
+                </div>
+
+                <!-- Email input -->
+                <div class="form-outline mb-4">
+                    <input type="email" id="form4Example2" class="form-control" placeholder="Email" />
+                </div>
+
+                <!-- Message input -->
+                <div class="form-outline mb-4">
+                    <textarea class="form-control" id="form4Example3" rows="4" placeholder="Üzenet..."></textarea>
+                </div>
+
+
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-outline-info btn-block text-light mb-4">Send</button>
+            </form>
+        </div>
+    </div>
 </div>
