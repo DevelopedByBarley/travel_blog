@@ -20,6 +20,7 @@ function adminHandler()
     ]);
 }
 
+
 function adminDashboardHandler()
 {
     checkIsAdminLoggedInOrRedirect();
@@ -31,42 +32,39 @@ function adminDashboardHandler()
 
 
 
-function adminTripsHandler() {
+function adminTripsHandler()
+{
     $pdo = getConnection();
     $stmt = $pdo->prepare("SELECT * FROM `trips`");
     $stmt->execute();
     $trips = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+
+
+
+
+
     echo render("wrapper.php", [
         "content" => render("pages/admin/admin_dashboard.php", [
             "innerContent" => render("pages/admin/trip_list.php", [
-                "trips" => $trips
+                "trips" => $trips,
             ])
         ])
     ]);
 }
 
-function tripFormHandler() {
+function tripFormHandler()
+{
+    checkIsAdminLoggedInOrRedirect();
+    $adminId = $_SESSION["adminId"];
     echo render("wrapper.php", [
         "content" => render("pages/admin/admin_dashboard.php", [
-            "innerContent" => render("pages/admin/trip_form.php", [])
+            "innerContent" => render("pages/admin/trip_form.php", [
+                "adminId" => (int)$adminId
+            ])
         ])
     ]);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 function adminRegisterHandler()
 {
@@ -119,9 +117,9 @@ function adminLoginHandler()
     }
 
     session_start();
-    $_SESSION["adminId"] = $admin["id"];
+    $_SESSION["adminId"] = $admin["adminId"];
 
-    header("Location: /admin/dashboard?loginFailed=1");
+    header("Location: /admin/dashboard");
 }
 
 
@@ -146,6 +144,8 @@ function isLoggedIn()
     if (!isset($_SESSION["adminId"])) return false;
     return true;
 }
+
+
 
 
 function checkIsAdminLoggedInOrRedirect()
@@ -234,4 +234,63 @@ function toSchema($schema)
     return $ret;
 }
 
-adminSchema();
+
+function adminAddTripHandler()
+{
+
+    
+    
+    $files = transformToSingleFiles($_FILES["files"]);
+    
+    $fileNames = [];
+    foreach ($files as $file) {
+        $fileNames[] = saveImage($file);
+    }
+    
+    $pdo = getConnection();
+    $stmt = $pdo->prepare("INSERT INTO `trips` (`id`, `title`, `description`, `content`, `images`, `time`, `ratings`, `adminId`) VALUES (NULL, ?, ?, ?, ? ,? ,?, ?)");
+    $stmt->execute([
+        $_POST["title"],
+        $_POST["description"],
+        serialize($_POST["content"]),
+        serialize($fileNames),
+        $_POST["time"],
+        $_POST["ratings"],
+        $_GET["id"],
+    ]);
+
+}
+
+function saveImage($file)
+{
+    $whiteList = [IMAGETYPE_JPEG, IMAGETYPE_GIF, IMAGETYPE_PNG];
+
+    if (!in_array(exif_imagetype($file["tmp_name"]), $whiteList)) return false;
+
+    $rand = uniqid(rand(), true);
+    $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
+
+    $originalFileName = $rand . '.' . $ext;
+    $directoryPath = "./public/images/";
+
+    file_put_contents($directoryPath . $originalFileName, file_get_contents($file["tmp_name"]));
+
+    return $originalFileName;
+}
+
+
+function transformToSingleFiles($rawFiles)
+{
+    echo "<pre>";
+    $ret = [];
+    for ($i = 0; $i < count($rawFiles["name"]); $i++) {
+        $ret[] = [
+            'name' => $rawFiles['name'][$i],
+            'type' => $rawFiles["type"][$i],
+            'tmp_name' => $rawFiles["tmp_name"][$i],
+            'size' => $rawFiles["size"][$i],
+            'error' => $rawFiles["error"][$i],
+        ];
+    }
+    return $ret;
+}

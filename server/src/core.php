@@ -19,7 +19,8 @@ $routes = [
     ],
     "POST" => [
         "/admin-register" => "adminRegisterHandler",
-        "/admin-login" => "adminLoginHandler"
+        "/admin-login" => "adminLoginHandler",
+        "/admin/add-trip" => "adminAddTripHandler",
     ]
 ];
 

@@ -123,9 +123,8 @@
     width: 100%;
   }
   #inner-container {
-    position: fixed;
-    width: 90%;
+    position: relative;
+    width: 80%;
     left: 300px;
-    min-height: 100vh;
   }
 }/*# sourceMappingURL=core.css.map */
