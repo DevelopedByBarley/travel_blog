@@ -1,5 +1,6 @@
 <div class="container-fluid">
 	<h1>Új utazás hozzáadása!</h1>
+	<br><br>
 	<form action="/admin/add-trip?id=<?= $params["adminId"] ?>" method="POST" enctype="multipart/form-data" class="w-100">
 		<div class="form-outline mb-4">
 			<input type="text" id="form4Example1" class="form-control" name="title" placeholder="Cím" />
@@ -36,9 +37,7 @@
 					<option value="4">Nagyszerű élmény volt, mindenképp menj el!!</option>
 				</select>
 
-
-				<!-- Submit button -->
-				<button type="submit" class="btn btn-primary btn-block mb-4">Út mentése</button>
+		<button type="submit" class="btn btn-primary btn-block mb-4">Út mentése</button>
 	</form>
 </div>
 

@@ -40,10 +40,6 @@ function adminTripsHandler()
     $trips = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
-
-
-
-
     echo render("wrapper.php", [
         "content" => render("pages/admin/admin_dashboard.php", [
             "innerContent" => render("pages/admin/trip_list.php", [
@@ -53,18 +49,7 @@ function adminTripsHandler()
     ]);
 }
 
-function tripFormHandler()
-{
-    checkIsAdminLoggedInOrRedirect();
-    $adminId = $_SESSION["adminId"];
-    echo render("wrapper.php", [
-        "content" => render("pages/admin/admin_dashboard.php", [
-            "innerContent" => render("pages/admin/trip_form.php", [
-                "adminId" => (int)$adminId
-            ])
-        ])
-    ]);
-}
+
 
 function adminRegisterHandler()
 {
@@ -235,18 +220,29 @@ function toSchema($schema)
 }
 
 
+function tripFormHandler()
+{
+    checkIsAdminLoggedInOrRedirect();
+    $adminId = $_SESSION["adminId"];
+    echo render("wrapper.php", [
+        "content" => render("pages/admin/admin_dashboard.php", [
+            "innerContent" => render("pages/admin/trip_form.php", [
+                "adminId" => (int)$adminId
+            ])
+        ])
+    ]);
+}
+
 function adminAddTripHandler()
 {
 
-    
-    
     $files = transformToSingleFiles($_FILES["files"]);
-    
+
     $fileNames = [];
     foreach ($files as $file) {
         $fileNames[] = saveImage($file);
     }
-    
+
     $pdo = getConnection();
     $stmt = $pdo->prepare("INSERT INTO `trips` (`id`, `title`, `description`, `content`, `images`, `time`, `ratings`, `adminId`) VALUES (NULL, ?, ?, ?, ? ,? ,?, ?)");
     $stmt->execute([
@@ -259,7 +255,36 @@ function adminAddTripHandler()
         $_GET["id"],
     ]);
 
+    header("Location: /admin/trips");
 }
+
+
+function deleteTripHandler()
+{
+
+    $pdo = getConnection();
+    $stmt = $pdo->prepare("SELECT `images` FROM `trips` WHERE id = ?");
+    $stmt->execute([$_GET["id"]]);
+    $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    $images = unserialize($data["images"]);
+    $directoryPath = "./public/images/";
+
+    foreach($images as $image) {
+        unlink($directoryPath . $image);
+    }
+
+    $stmt = $pdo->prepare("DELETE FROM `trips` WHERE id = ?");
+    $stmt->execute([
+        $_GET["id"]
+    ]);
+
+
+    header("Location: /admin/trips");
+}
+
+
+
 
 function saveImage($file)
 {

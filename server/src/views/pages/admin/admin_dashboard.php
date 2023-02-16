@@ -1,7 +1,7 @@
 <nav id="admin-navbar" class="navbar navbar-expand-md bg-light border">
     <div class="container-fluid navbar-container">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            Menu
+        <button class="navbar-toggler btn btn-outline-danger border" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            Admin
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
@@ -16,7 +16,9 @@
         </div>
     </div>
 </nav>
+<br><br>
+<h1 class="text-center">Üdvözöllek az admin felületen!</h1>
+<br><br>
 <div id="inner-container">
-    <h1 class="m-5">Üdvözöllek az Admin felületen!</h1>
-   <?php echo $params["innerContent"] ?? ""?>
+    <?php echo $params["innerContent"] ?? "" ?>
 </div>

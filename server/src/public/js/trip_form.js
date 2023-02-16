@@ -44,15 +44,27 @@ function render() {
   state.map((field, index) => {
     if (index < 3) {
       contentTemplate += `
-          <div id="content-template" data-id=${field.id} class="mb-3 border rounded p-5">
-              <h6 class="mb-4 bg-info text-light d-flex align-items-center justify-content-center" style="border-radius: 50%; height: 25px; width: 25px;">${index + 1}.</h6>
+          <div id="content-template" data-id=${
+            field.id
+          } class="mb-3 border rounded p-5" style="background:rgba(0, 0, 0, 0.48)">
+              <h6 class="mb-4 bg-warning text-light d-flex align-items-center justify-content-center" style="border-radius: 50%; height: 30px; width: 30px;">${
+                index + 1
+              }.</h6>
               <input type="text" oninput=setPrevValue(event)  id="title" class="form-control mb-5" 
-              name="content[${index}]" placeholder="Tartalom cím.." value='${field.title ? field.title : ""}'/>
+              name="content[${index}]" placeholder="Tartalom cím.." value='${
+        field.title ? field.title : ""
+      }'/>
 
-              <input type="text" class="form-control mb-3" oninput=setPrevValue(event) id="paragraph_1" rows="3" placeholder="1. paragrafus"  value='${field.paragraph_1 ? field.paragraph_1 : ""}' name="content[]"></input>
-              <input type="text" class="form-control mb-3" oninput=setPrevValue(event) id="paragraph_2" value='${field.paragraph_2 ? field.paragraph_2 : ""}' rows="3" placeholder="2. paragrafus" name="content[]"></input>
-              <input type="text" class="form-control mb-3" oninput=setPrevValue(event) id="paragraph_3" value='${field.paragraph_3 ? field.paragraph_3 : ""}' rows="3" placeholder="3. paragrafus" name="content[]"></input>
-              <button class="btn btn-outline-danger" onClick=deleteContentField(event)>Törlés</button>
+              <input type="text" class="form-control mb-3" oninput=setPrevValue(event) id="paragraph_1" rows="3" placeholder="1. paragrafus"  value='${
+                field.paragraph_1 ? field.paragraph_1 : ""
+              }' name="content[]"></input>
+              <input type="text" class="form-control mb-3" oninput=setPrevValue(event) id="paragraph_2" value='${
+                field.paragraph_2 ? field.paragraph_2 : ""
+              }' rows="3" placeholder="2. paragrafus" name="content[]"></input>
+              <input type="text" class="form-control mb-3" oninput=setPrevValue(event) id="paragraph_3" value='${
+                field.paragraph_3 ? field.paragraph_3 : ""
+              }' rows="3" placeholder="3. paragrafus" name="content[]"></input>
+              <button class="btn btn-danger" onClick=deleteContentField(event)>Törlés</button>
           </div>
       `;
     }

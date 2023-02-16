@@ -10,7 +10,7 @@
                         <p class="card-text"><?= $trip["description"] ?></p>
                         <a href="#" class="btn btn-primary m-1">Megtekintés</a>
                         <a href="#" class="btn btn-warning m-1">Szerkesztés</a>
-                        <a href="#" class="btn btn-danger m-1">Törlés</a>
+                        <a href="/admin/delete-trip?id=<?= $trip["id"] ?>" class="btn btn-danger m-1">Törlés</a>
                     </div>
                 </div>
             </div>
