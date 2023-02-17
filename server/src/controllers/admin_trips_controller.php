@@ -29,14 +29,15 @@ function adminAddTripHandler()
     }
 
     $pdo = getConnection();
-    $stmt = $pdo->prepare("INSERT INTO `trips` (`id`, `title`, `description`, `content`, `images`, `time`, `ratings`, `templateId`, `adminId`) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt = $pdo->prepare("INSERT INTO `trips` (`id`, `title`, `description`, `content`, `images`, `time`, `ratings`, `summary`, `templateId`, `adminId`) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     $stmt->execute([
         $_POST["title"],
         $_POST["description"],
         json_encode($_POST["content"]),
         serialize($fileNames),
-        $_POST["time"],
+        strtotime($_POST["time"]),
         $_POST["ratings"],
+        $_POST["summary"],
         (int)$_POST["templateId"],
         $_GET["id"],
     ]);
@@ -79,15 +80,39 @@ function tripSingleHandler()
     $stmt->execute([$_GET["id"]]);
     $trip = $stmt->fetch(PDO::FETCH_ASSOC);
     $tripContents = json_decode($trip["content"], true);
+    $tripContentSchema = setTripContentsToSchema($tripContents);
 
-    setTripContentsToSchema($tripContents); 
+    switch ((int)$trip["ratings"]) {
+        case 1:
+            $ratingMessage = "Rossz élmény,  senkinek sem ajánlom!";
+            break;
+        case 2:
+            $ratingMessage = "Rossz volt, de rosszabbul is járhattam volna!";
+            break;
+        case 3:
+            $ratingMessage = "Nem volt rossz, de ha van más választásod nem ajánlanám!";
+            break;
+        case 4:
+            $ratingMessage = "Kellemes élmény volt, menj el havan rá lehetőséged!";
+            break;
+        case 5:
+            $ratingMessage = "Nagyszerű élmény volt, mindenképp menj el!";
+            break;
+        default:
+            null;
+    }
 
+    $ratings = [
+        "stars" => array_fill(0, (int)$trip["ratings"], ""),
+        "message" => $ratingMessage
+    ];
 
     echo render("wrapper.php", [
         "content" => render("pages/admin/admin_dashboard.php", [
             "innerContent" => render("pages/templates/template_" . (int)$trip['templateId'] . ".php", [
                 "trip" => $trip,
-                "tripContents" => $tripContents
+                "tripContents" => $tripContentSchema,
+                "ratings" => $ratings,
             ])
         ])
     ]);
@@ -96,20 +121,22 @@ function tripSingleHandler()
 
 
 
-function setTripContentsToSchema($schema) {
+function setTripContentsToSchema($schema)
+{
     $ret = [];
-    foreach($schema as $key => $tripContents) {
-       $tripFields = array_values($tripContents);
-       $ret[] = [
-        "title" => $tripFields[0],
-        "paragraph_1" => $tripFields[1],
-        "paragraph_2" => $tripFields[2],
-        "paragraph_3" => $tripFields[3],
-       ];
+    foreach ($schema as $key => $tripContents) {
+        $tripFields = array_values($tripContents);
+        $ret[] = [
+            "title" => $tripFields[0],
+            "paragraphs" => [
+                "paragraph_1" => $tripFields[1],
+                "paragraph_2" => $tripFields[2],
+                "paragraph_3" => $tripFields[3],
+            ]
+        ];
     }
-    
-    return $ret;
 
+    return $ret;
 }
 
 
@@ -152,4 +179,3 @@ function transformToSingleFiles($rawFiles)
     }
     return $ret;
 }
-

@@ -37,7 +37,9 @@
 					<option value="4">Nagyszerű élmény volt, mindenképp menj el!!</option>
 				</select>
 
-				
+				<div class="form-group mb-5">
+					<textarea class="form-control" id="summary" rows="3" name="summary" placeholder="Összegzés írása.."></textarea>
+				</div>
 
 				<select class="form-select mb-5" aria-label="Default select example" name="templateId">
 					<option selected disabled>Sablon kiválasztsa</option>
@@ -45,6 +47,7 @@
 					<option value=2>2</option>
 					<option value=3>3</option>
 				</select>
+
 
 
 				<button type="submit" class="btn btn-primary btn-block mb-4">Út mentése</button>

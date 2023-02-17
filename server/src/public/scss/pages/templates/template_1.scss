@@ -2,8 +2,27 @@
   .header {
     min-height: 50vh;
     #header-content-title {
+      text-align: center;
+      padding: 1.5rem;
+      @media (min-width: 1200px) {
         display: inline;
-        padding: 1.5rem;
+      }
+    }
+  }
+
+  .row {
+    min-height: 500px;
+  }
+
+  .image {
+    min-height: 500px;
+  }
+
+  .summary-container {
+    .summary {
+      position: relative;
+      top: -20px;
+      z-index: -1;
     }
   }
 }

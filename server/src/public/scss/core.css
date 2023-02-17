@@ -105,7 +105,7 @@
   }
 }
 
-@media (min-width: 780px) {
+@media (min-width: 1200px) {
   #admin-navbar {
     min-height: 100vh;
     position: fixed;
@@ -132,6 +132,25 @@
   min-height: 50vh;
 }
 #template_1-container .header #header-content-title {
-  display: inline;
+  text-align: center;
   padding: 1.5rem;
+}
+@media (min-width: 1200px) {
+  #template_1-container .header #header-content-title {
+    display: inline;
+  }
+}
+#template_1-container .row {
+  min-height: 500px;
+}
+#template_1-container .image {
+  min-height: 500px;
+}
+#template_1-container .summary-container .summary {
+  position: relative;
+  top: -20px;
+  z-index: -1;
+}
+#template_1-container .templateId {
+  background-color: red;
 }/*# sourceMappingURL=core.css.map */
