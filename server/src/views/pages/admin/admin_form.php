@@ -27,6 +27,11 @@
             <?php endif ?>
         </div>
 
+        <div class="chose-template"></div>
+
+
+        
+
         <button type="submit" class="btn btn-outline-info">Bejelentkezés</button>
 
     </form>

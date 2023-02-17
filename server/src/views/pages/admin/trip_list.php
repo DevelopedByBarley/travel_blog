@@ -8,7 +8,7 @@
                     <div class="card-body">
                         <h5 class="card-title"><?= $trip["title"] ?></h5>
                         <p class="card-text"><?= $trip["description"] ?></p>
-                        <a href="#" class="btn btn-primary m-1">Megtekintés</a>
+                        <a href="/admin/trip-single?id=<?= $trip["id"] ?>" class="btn btn-primary m-1">Megtekintés</a>
                         <a href="#" class="btn btn-warning m-1">Szerkesztés</a>
                         <a href="/admin/delete-trip?id=<?= $trip["id"] ?>" class="btn btn-danger m-1">Törlés</a>
                     </div>

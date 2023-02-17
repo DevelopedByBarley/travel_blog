@@ -1,0 +1,7 @@
+#template_1-container .header {
+  min-height: 50vh;
+}
+#template_1-container .header #header-content-title {
+  display: inline;
+  padding: 1.5rem;
+}/*# sourceMappingURL=template_1.css.map */

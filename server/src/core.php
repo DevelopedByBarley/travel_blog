@@ -14,6 +14,7 @@ $routes = [
         "/admin/dashboard" => "adminDashboardHandler",
         "/admin/trips" => "adminTripsHandler",
         "/admin/logout" => "adminLogoutHandler",
+        "/admin/trip-single" => "tripSingleHandler",
         "/admin/new-trip" => "tripFormHandler",
         "/admin/delete-trip" => "deleteTripHandler",
         "/tripList" => "tripListHandler"
