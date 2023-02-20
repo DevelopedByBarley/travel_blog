@@ -1,4 +1,4 @@
-<div id="template_3-container" class="container">
+<div id="template_3-container" class="container-fluid">
     <h1 class="bg-dark text-light m-2" id="header-content-title"><?= $params["trip"]["title"] ?></h1>
 
     <div class="row">

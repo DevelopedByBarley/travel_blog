@@ -29,13 +29,13 @@
                     <p><?= $paragraph ?></p>
                 <?php endforeach ?>
             </div>
-            <div class="second-image image" style="background: url('../../../public/images/<?= unserialize($params["trip"]["images"])[1] ?? 'forest.jpg' ?>') center center; background-size: cover;"></div>
+            <div class="second-image image" style="background: url('../../../public/images/<?= unserialize($params["trip"]["images"])[2] ?? 'forest.jpg' ?>') center center; background-size: cover;"></div>
         </div>
     <?php endif ?>
     <br><br><br>
     <?php if (!empty($params["tripContents"][2])) : ?>
         <div class="mb-5 mt-5 row first-row">
-            <div class="col-lg-6 image first-image" style="background: url('../../../public/images/<?= unserialize($params["trip"]["images"])[2] ?? 'forest.jpg' ?>') no-repeat center center; background-size: cover;"></div>
+            <div class="col-lg-6 image first-image" style="background: url('../../../public/images/<?= unserialize($params["trip"]["images"])[3] ?? 'forest.jpg' ?>') no-repeat center center; background-size: cover;"></div>
             <div class="col-lg-6 p-5 d-flex justify-content-center  flex-column">
                 <h1 class="mb-5"><?= $params["tripContents"][2]["title"] ?></h1>
                 <?php foreach ($params["tripContents"][2]["paragraphs"] as $paragraph) : ?>

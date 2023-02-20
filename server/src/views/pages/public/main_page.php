@@ -40,7 +40,7 @@
                     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
                 </div>
                 <div class="carousel-inner">
-                    <?php foreach ($params["trips"] as $index => $trip) : ?>
+                    <?php foreach ($params["carouselTrips"] as $index => $trip) : ?>
                         <a href="/trip-single?id=<?= $trip["id"] ?>">
                             <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>" style="background: url('../../../public/images/<?= unserialize($params["trips"][$index]["images"])[0] ?>') center center; background-size: cover;">
                                 <div class="carousel-caption d-none d-md-block">

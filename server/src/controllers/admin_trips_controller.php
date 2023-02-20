@@ -89,7 +89,7 @@ function deleteTripHandler()
 }
 
 
-function tripSingleHandler()
+function adminTripSingleHandler()
 {
     checkIsAdminLoggedInOrRedirect();
 
