@@ -1,0 +1,11 @@
+#template_2-container {
+    .header .row {
+        .header-image {
+            min-height: 500px;
+        }
+    }
+
+    .first-row .first-image, .second-row .second-image {
+        min-height: 500px;
+    }
+}

@@ -128,17 +128,19 @@
     left: 300px;
   }
 }
-#template_1-container .header {
-  min-height: 50vh;
-}
-#template_1-container .header #header-content-title {
+#template_1-container #header-content-title {
   text-align: center;
   padding: 1.5rem;
+  position: relative;
+  top: 75px;
 }
 @media (min-width: 1200px) {
-  #template_1-container .header #header-content-title {
-    display: inline;
+  #template_1-container #header-content-title {
+    display: inline-block;
   }
+}
+#template_1-container .header {
+  min-height: 50vh;
 }
 #template_1-container .row {
   min-height: 500px;
@@ -151,6 +153,14 @@
   top: -20px;
   z-index: -1;
 }
-#template_1-container .templateId {
-  background-color: red;
+
+#template_2-container .header .row .header-image {
+  min-height: 500px;
+}
+#template_2-container .first-row .first-image, #template_2-container .second-row .second-image {
+  min-height: 500px;
+}
+
+#template_3-container .image {
+  min-height: 500px;
 }/*# sourceMappingURL=core.css.map */

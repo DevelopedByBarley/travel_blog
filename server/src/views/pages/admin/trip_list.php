@@ -2,7 +2,7 @@
     <h1>Utazások Listája!</h1>
     <div class="row">
         <?php foreach ($params["trips"] as $trip) : ?>
-            <div class="col col-md-6 col-lg-3">
+            <div class=" col-md-6 col-lg-3">
                 <div class="card text-center">
                     <div class="card-image" style="background: url('../../../public/images/<?= unserialize($trip["images"])[0] ?>') center center; background-size: cover; height: 300px"></div>
                     <div class="card-body">

@@ -1,0 +1,6 @@
+#template_2-container .header .row .header-image {
+  min-height: 500px;
+}
+#template_2-container .first-row .first-image, #template_2-container .second-row .second-image {
+  min-height: 500px;
+}/*# sourceMappingURL=template_2.css.map */

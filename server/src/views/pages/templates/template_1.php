@@ -3,8 +3,8 @@
 
 
 <div class="container-fluid" id="template_1-container">
+    <h1 class="bg-dark text-light m-2" id="header-content-title"><?= $params["trip"]["title"] ?></h1>
     <header class="header mb-3" style="background: url('../../../public/images/<?= unserialize($params["trip"]["images"])[0] ?>') center center; background-size: cover;">
-        <h1 class="bg-dark text-light m-2" id="header-content-title"><?= $params["trip"]["title"] ?></h1>
     </header>
     <h4 class="bg-light">Utazás időpontja: <?= date('m/d/Y', $params["trip"]["time"]) ?></h4>
     <h3 class="bg-light border rounded p-5" id="content-description"><?= $params["trip"]["description"] ?></h3>
@@ -54,7 +54,7 @@
         </div>
     </div>
 
-    
+
 
     <div class="rating-container row">
         <div class="col text-center">
@@ -69,4 +69,3 @@
     </div>
 
 </div>
-

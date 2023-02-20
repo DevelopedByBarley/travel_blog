@@ -1,14 +1,16 @@
-#template_1-container .header {
-  min-height: 50vh;
-}
-#template_1-container .header #header-content-title {
+#template_1-container #header-content-title {
   text-align: center;
   padding: 1.5rem;
+  position: relative;
+  top: 75px;
 }
 @media (min-width: 1200px) {
-  #template_1-container .header #header-content-title {
-    display: inline;
+  #template_1-container #header-content-title {
+    display: inline-block;
   }
+}
+#template_1-container .header {
+  min-height: 50vh;
 }
 #template_1-container .row {
   min-height: 500px;
