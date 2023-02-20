@@ -7,7 +7,9 @@
             <div class="navbar-nav">
                 <a class="nav-link active text-dark" aria-current="page" href="/admin/profile">Profil</a>
                 <a class="nav-link active text-dark" aria-current="page" href="/admin/trips">Útazások</a>
+                <a class="nav-link active text-dark" aria-current="page" href="/admin/trips">Bakancslista</a>
                 <a class="nav-link active text-dark" aria-current="page" href="/admin/new-trip">Új utazás hozzáadása</a>
+                <a class="nav-link active text-dark" aria-current="page" href="/admin/new-trip">Új Bakancslista hozzáadása</a>
                 <a class="nav-link text-dark" href="/admin/emails">Emailek</a>
                 <a href="/admin/logout" class="mt-5">
                     <button class="btn btn-danger text-light">Kijelentkezés</button>

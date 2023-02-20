@@ -1,4 +1,5 @@
 <?php
+require './helpers/debug_console.php';
 require '../../database/getConnection.php';
 require './helpers/render.php';
 require './controllers/public_controller.php';
@@ -10,19 +11,24 @@ $method = $_SERVER["REQUEST_METHOD"];
 $routes = [
     "GET" => [
         "/" => "homeHandler",
+        "/trip-list" => "tripListHandler",
+        "/trip-single" => "tripSingleHandler",
         "/admin" => "adminHandler",
+        "/admin/profile" => "adminProfileHandler",
+        "/admin/profile-edit" => "editAdminProfileFormHandler",
         "/admin/dashboard" => "adminDashboardHandler",
         "/admin/trips" => "adminTripsHandler",
         "/admin/logout" => "adminLogoutHandler",
-        "/admin/trip-single" => "tripSingleHandler",
         "/admin/new-trip" => "tripFormHandler",
         "/admin/delete-trip" => "deleteTripHandler",
-        "/tripList" => "tripListHandler"
+        "/admin/edit-trip" => "editTripFormHandler",
     ],
     "POST" => [
         "/admin-register" => "adminRegisterHandler",
         "/admin-login" => "adminLoginHandler",
         "/admin/add-trip" => "adminAddTripHandler",
+        "/admin/edit-trip" => "editTripHandler",
+        "/admin/profile-edit" => "editAdminProfileHandler",
     ]
 ];
 

@@ -1,5 +1,23 @@
 <?php
 
+function adminTripsHandler()
+{
+    $pdo = getConnection();
+    $stmt = $pdo->prepare("SELECT * FROM `trips`");
+    $stmt->execute();
+    $trips = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+    echo render("wrapper.php", [
+        "content" => render("pages/admin/admin_dashboard.php", [
+            "innerContent" => render("pages/admin/trip_list.php", [
+                "trips" => $trips,
+            ])
+        ])
+    ]);
+}
+
+
 function tripFormHandler()
 {
     checkIsAdminLoggedInOrRedirect();
@@ -118,6 +136,81 @@ function tripSingleHandler()
     ]);
 }
 
+
+function editTripFormHandler()
+{
+    $pdo = getConnection();
+    $stmt = $pdo->prepare("SELECT `images` FROM `trips` WHERE id = ?");
+    $stmt->execute([
+        $_GET["id"] ?? ""
+    ]);
+    $data = $stmt->fetch(PDO::FETCH_ASSOC);
+    $prevImages = base64_encode($data["images"]);
+
+
+    echo render("wrapper.php", [
+        "content" => render("pages/admin/admin_dashboard.php", [
+            "innerContent" => render("pages/admin/admin_edit_trip_form.php", [
+                "prevImages" => $prevImages,
+                "id" => $_GET["id"]
+            ])
+        ])
+    ]);
+}
+
+function editTripHandler()
+{
+
+
+    $prevImages = base64_decode($_GET["images"]);
+    $decoded = unserialize($prevImages);
+
+    if (!empty($decoded)) {
+        foreach ($decoded as $prevImage) {
+            var_dump($prevImage);
+            unlink("./public/images/" . $prevImage);
+        }
+    }
+
+
+
+
+    $files = transformToSingleFiles($_FILES["files"]);
+
+    $fileNames = [];
+    foreach ($files as $file) {
+        $fileNames[] = saveImage($file);
+    }
+
+
+
+    $pdo = getConnection();
+    $stmt = $pdo->prepare("UPDATE `trips` SET 
+    `title` = ?, 
+    `description` = ?, 
+    `content` = ?, 
+    `images` = ?, 
+    `time` = ?, 
+    `ratings` = ?, 
+    `summary` = ?, 
+    `templateId` = ? 
+    WHERE `trips`.`id` = ?");
+
+
+    $stmt->execute([
+        $_POST["title"],
+        $_POST["description"],
+        json_encode($_POST["content"]),
+        serialize($fileNames),
+        strtotime($_POST["time"]),
+        $_POST["ratings"],
+        $_POST["summary"],
+        (int)$_POST["templateId"],
+        $_GET["id"],
+    ]);
+
+    header("Location: /admin/trips");
+}
 
 
 

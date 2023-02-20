@@ -1,6 +1,7 @@
 <?php
 require 'validators.php';
 require 'admin_trips_controller.php';
+require 'admin_profile_controller.php';
 
 function adminHandler()
 {
@@ -22,6 +23,8 @@ function adminHandler()
 }
 
 
+
+
 function adminDashboardHandler()
 {
     checkIsAdminLoggedInOrRedirect();
@@ -33,22 +36,6 @@ function adminDashboardHandler()
 
 
 
-function adminTripsHandler()
-{
-    $pdo = getConnection();
-    $stmt = $pdo->prepare("SELECT * FROM `trips`");
-    $stmt->execute();
-    $trips = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-
-    echo render("wrapper.php", [
-        "content" => render("pages/admin/admin_dashboard.php", [
-            "innerContent" => render("pages/admin/trip_list.php", [
-                "trips" => $trips,
-            ])
-        ])
-    ]);
-}
 
 
 

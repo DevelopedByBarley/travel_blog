@@ -1,29 +1,30 @@
 <?php
 function homeHandler()
 {
-    $trips = array_fill(0, 12, [
-        "tripId" => 0,
-        "title" => "test title",
-        "description" => "Lorem ipsum dolor sit 
-                        amet consectetur adipisicing elit. Earum autem magnam
-                        molestiae aspernatur blanditiis laborum mollitia r
-                        epellendus dolorum, maiores, incidunt, a nisi doloremqu
-                        e iste accusamus nihil! Earum quas eveniet consectetur.",
-        "time" => time(),
-        "tripImages" => [
-            "forest.jpg",
-            "header_background.jpg",
-            "mountains.jpg",
-            "snow-mountain.jpg",
-        ],
-        "adminId" => 1
-    ]);
+
+    // All trips
+    $pdo = getConnection();
+    $stmt = $pdo->prepare("SELECT * FROM `trips`");
+    $stmt -> execute();
+    $trips = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+    // Latest Trips
+    $stmt = $pdo->prepare("SELECT * FROM `trips` ORDER BY id ASC LIMIT 6");
+    $stmt -> execute();
+    $anotherTrips = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+    $stmt = $pdo->prepare("SELECT `name`, `profileImage` FROM `profile`");
+    $stmt -> execute();
+    $profile = $stmt->fetch(PDO::FETCH_ASSOC);
 
     echo render("wrapper.php", [
         "content" => render("pages/public/main_page.php", [
-            "latestTrips" =>  array_slice($trips, 0, 3),
-            "anotherTrips" => array_slice($trips, 0, 6),
-            "bucketList" => array_slice($trips, 0, 6)
+            "profile" => $profile,
+            "trips" => $trips,
+            "anotherTrips" => $anotherTrips,
+            "bucketList" => $trips
         ])
     ]);
 }

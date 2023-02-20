@@ -1,7 +1,7 @@
 <div id="header">
-    <div class="profile-image"></div>
-    <div class="header-content text-center">
-        <h1>Profile Name</h1>
+    <div class="profile-image" style="background: url('../../../public/images/<?= $params["profile"]["profileImage"] ?>') center center; background-size: cover;"></div>
+    <div class=" header-content text-center">
+        <h1><?= $params["profile"]["name"] ?></h1>
     </div>
 </div>
 <div class="container about-me-container">
@@ -40,13 +40,15 @@
                     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
                 </div>
                 <div class="carousel-inner">
-                    <?php foreach ($params["latestTrips"] as $index => $trip) : ?>
-                        <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>" style="background: url('../../../public/images/<?= $trip["tripImages"][$index] ?>') center center; background-size: cover;">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Second slide label</h5>
-                                <p>Some representative placeholder content for the second slide.</p>
+                    <?php foreach ($params["trips"] as $index => $trip) : ?>
+                        <a href="/trip-single?id=<?= $trip["id"] ?>">
+                            <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>" style="background: url('../../../public/images/<?= unserialize($params["trips"][$index]["images"])[0] ?>') center center; background-size: cover;">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5><?= $trip["title"] ?></h5>
+                                    <p><?= $trip["description"] ?></p>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     <?php endforeach ?>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
@@ -73,11 +75,11 @@
         <?php foreach ($params["anotherTrips"] as $index => $trip) : ?>
             <div class="col-md-4 col-lg-2 mb-5 d-flex flex-column align-items-center justify-content-center">
                 <div class="card">
-                    <div class="card-image" style="background: url('../../../public/images/<?= $trip["tripImages"][$index] ?>') center center; background-size: cover;"></div>
+                    <div class="card-image" style="background: url('../../../public/images/<?= unserialize($params["trips"][$index]["images"])[0] ?>') center center; background-size: cover;"></div>
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-info text-l">Megtekintés</a>
+                        <h5 class="card-title"><?= $trip["title"] ?></h5>
+                        <p class="card-text"><?= $trip["description"] ?></p>
+                        <a href="/trip-single?id=<?= $trip["id"] ?>" class="btn btn-info text-l">Megtekintés</a>
                     </div>
                 </div>
             </div>
@@ -95,9 +97,9 @@
         <p class="text-center mb-5">Amerre még nem jártam.</p>
         <?php foreach ($params["bucketList"] as $index => $trip) : ?>
             <div class="col-sm-4 d-flex flex-column align-items-center justify-content-center mb-5">
-                <div class="img-bubble" style="background: url('../../../public/images/<?= $trip["tripImages"][$index] ?>') center center; background-size: cover;"></div>
+                <div class="img-bubble" style="background: url('../../../public/images/<?= unserialize($params["trips"][$index]["images"])[0] ?>') center center; background-size: cover;"></div>
                 <div class="content mt-3">
-                    <h3>Lorem Ipsum</h3>
+                    <h3><?= $trip["title"] ?></h3>
                 </div>
             </div>
         <?php endforeach ?>

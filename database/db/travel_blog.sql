@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2023. Feb 16. 17:33
+-- Létrehozás ideje: 2023. Feb 20. 15:26
 -- Kiszolgáló verziója: 10.4.27-MariaDB
 -- PHP verzió: 8.0.25
 
@@ -43,6 +43,29 @@ INSERT INTO `admin` (`adminId`, `email`, `password`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Tábla szerkezet ehhez a táblához `profile`
+--
+
+CREATE TABLE `profile` (
+  `profileId` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `age` int(11) NOT NULL,
+  `profileImage` varchar(255) NOT NULL,
+  `editedAt` int(11) NOT NULL,
+  `adminId` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- A tábla adatainak kiíratása `profile`
+--
+
+INSERT INTO `profile` (`profileId`, `name`, `email`, `age`, `profileImage`, `editedAt`, `adminId`) VALUES
+(0, 'Szaniszló Árpád', 'Barley@gmail.com', 22, '159196372163f379fa12ea16.36798346.jpg', 1676900858, 4);
+
+-- --------------------------------------------------------
+
+--
 -- Tábla szerkezet ehhez a táblához `trips`
 --
 
@@ -50,10 +73,12 @@ CREATE TABLE `trips` (
   `id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
-  `content` varchar(700) NOT NULL,
+  `content` mediumtext NOT NULL,
   `images` varchar(255) NOT NULL,
   `time` int(11) NOT NULL,
   `ratings` int(11) NOT NULL,
+  `summary` varchar(1000) NOT NULL,
+  `templateId` int(11) NOT NULL,
   `adminId` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -66,6 +91,13 @@ CREATE TABLE `trips` (
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`adminId`);
+
+--
+-- A tábla indexei `profile`
+--
+ALTER TABLE `profile`
+  ADD PRIMARY KEY (`profileId`),
+  ADD KEY `adminId` (`adminId`);
 
 --
 -- A tábla indexei `trips`
@@ -85,14 +117,26 @@ ALTER TABLE `admin`
   MODIFY `adminId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT a táblához `profile`
+--
+ALTER TABLE `profile`
+  MODIFY `profileId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT a táblához `trips`
 --
 ALTER TABLE `trips`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=150;
 
 --
 -- Megkötések a kiírt táblákhoz
 --
+
+--
+-- Megkötések a táblához `profile`
+--
+ALTER TABLE `profile`
+  ADD CONSTRAINT `fk4` FOREIGN KEY (`adminId`) REFERENCES `admin` (`adminId`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
 -- Megkötések a táblához `trips`
