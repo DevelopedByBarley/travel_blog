@@ -79,6 +79,12 @@
       width: 150px;
       border: 1px solid;
       border-radius: 50%;
+      transition: all .4s ease-in-out;
+      filter: grayscale(30%);
+      &:hover  {
+        transform: rotate(10deg) scale(1.08);
+        filter: grayscale(0);
+      }
     }
   }
 }

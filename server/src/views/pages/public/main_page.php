@@ -112,7 +112,7 @@
             <h1>Ha van egy jó tipped, vedd fel velem a kapcsolatod!</h1>
         </div>
         <div class="col-sm-6 form">
-            <form>
+            <form action="/fail">
                 <!-- Name input -->
                 <div class="form-outline mb-4">
                     <input type="text" id="form4Example1" class="form-control" placeholder="Név" />
