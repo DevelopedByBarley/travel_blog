@@ -28,6 +28,7 @@ $routes = [
         "/admin/bucket-form" => "bucketFormHandler",
         "/admin/delete-bucket" => "deleteBucketHandler",
         "/admin/edit-bucket" => "editBucketFormHandler",
+        "/admin/get-trip-content" => "getTripContentHandler"
     ],
     "POST" => [
         "/admin-register" => "adminRegisterHandler",
@@ -43,8 +44,4 @@ $routes = [
 $handlerFunction = $routes[$method][$path] ?? "notFoundHandler";
 
 $handlerFunction();
-
-
-
-
 

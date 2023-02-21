@@ -1,14 +1,14 @@
 <div class="container-fluid">
-	<h1>Új utazás hozzáadása!</h1>
+	<h1>Utazás szerkesztése!</h1>
 	<br><br>
 	<form action="/admin/edit-trip?id=<?= $params["id"] ?>&images=<?= $params["prevImages"] ?>" method="POST" enctype="multipart/form-data" class="w-100">
 		<div class="form-outline mb-4">
-			<input type="text" id="form4Example1" class="form-control" name="title" placeholder="Cím" />
+			<input type="text" id="form4Example1" class="form-control" name="title" placeholder="Cím" required value="<?= $params["trip"]["title"] ?? '' ?>" />
 		</div>
 		<div class="form-outline mb-4">
-			<input type="text" id="form4Example2" class="form-control" name="description" placeholder="Leírás" />
+			<input type="text" id="form4Example2" class="form-control" name="description" placeholder="Leírás" required value="<?= $params["trip"]["description"] ?? '' ?>" />
 		</div>
-
+		<?php $name = "Herllo" ?>
 		<label>Tartalom hozzáadása(max 3)</label>
 		<button class="btn btn-outline-primary m-2" onclick="addContentField(event)">
 			<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
@@ -18,31 +18,31 @@
 		</button>
 		<div id="content-container">
 			<div id="content-template" data-id=0 ">
-			</div>
+		</div>
 		</div>
 
 				<label for=" date">Utazás időpontja</label>
-				<input id="date" class="form-control" type="date" name="time" />
+				<input id="date" class="form-control" type="date" name="time" required value="<?= date("Y-m-d", $params["trip"]["time"]) ?>" />
 				<div class="files">
-					<input type="file" name="files[]" class="m-2 mt-5" multiple class="form-control" />
+					<input type="file" name="files[]" class="m-2 mt-5" multiple class="form-control" required />
 				</div>
 				<br>
 
-				<select class="form-select mb-5" aria-label="Default select example" name="ratings">
-					<option selected disabled>Utazás értékelése</option>
+				<select class="form-select mb-5" aria-label="Default select example" name="ratings" required>
+					<option selected disabled value="">Utazás értékelése</option>
 					<option value="1">Rossz élmény, senkinek sem ajánlom...</option>
 					<option value="2">Rossz volt, de rosszabbúl is járhattam volna</option>
 					<option value="3">Nem volt rossz, de ha ván más választásod nem ajánlanám!</option>
 					<option value="4">Kellemes élmény volt, menj el ha van rá lehetőséged!</option>
-					<option value="4">Nagyszerű élmény volt, mindenképp menj el!!</option>
+					<option value="5">Nagyszerű élmény volt, mindenképp menj el!!</option>
 				</select>
 
 				<div class="form-group mb-5">
-					<textarea class="form-control" id="summary" rows="3" name="summary" placeholder="Összegzés írása.."></textarea>
+					<textarea class="form-control" id="summary" rows="3" name="summary" placeholder="Összegzés írása.." required><?= $params["trip"]["summary"] ?? '' ?></textarea>
 				</div>
 
-				<select class="form-select mb-5" aria-label="Default select example" name="templateId">
-					<option selected disabled>Sablon kiválasztsa</option>
+				<select class="form-select mb-5" aria-label="Default select example" name="templateId" required>
+					<option selected disabled value="">Sablon kiválasztsa</option>
 					<option value=1>1</option>
 					<option value=2>2</option>
 					<option value=3>3</option>

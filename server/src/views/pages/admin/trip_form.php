@@ -3,10 +3,11 @@
 	<br><br>
 	<form action="/admin/add-trip?id=<?= $params["adminId"] ?>" method="POST" enctype="multipart/form-data" class="w-100">
 		<div class="form-outline mb-4">
-			<input type="text" id="form4Example1" class="form-control" name="title" placeholder="Cím" />
+			<input type="text" id="form4Example1" class="form-control" name="title" placeholder="Cím" required/>
 		</div>
+		
 		<div class="form-outline mb-4">
-			<input type="text" id="form4Example2" class="form-control" name="description" placeholder="Leírás" />
+			<input type="text" id="form4Example2" class="form-control" name="description" placeholder="Leírás" required />
 		</div>
 
 		<label>Tartalom hozzáadása(max 3)</label>
@@ -22,14 +23,14 @@
 		</div>
 
 				<label for=" date">Utazás időpontja</label>
-				<input id="date" class="form-control" type="date" name="time" />
+				<input id="date" class="form-control" type="date" name="time" required />
 				<div class="files">
-					<input type="file" name="files[]" class="m-2 mt-5" multiple class="form-control" />
+					<input type="file" name="files[]" class="m-2 mt-5" multiple class="form-control" required />
 				</div>
 				<br>
 
-				<select class="form-select mb-5" aria-label="Default select example" name="ratings">
-					<option selected disabled>Utazás értékelése</option>
+				<select class="form-select mb-5" aria-label="Default select example" name="ratings" required>
+					<option selected disabled value="">Utazás értékelése</option>
 					<option value="1">Rossz élmény, senkinek sem ajánlom...</option>
 					<option value="2">Rossz volt, de rosszabbúl is járhattam volna</option>
 					<option value="3">Nem volt rossz, de ha ván más választásod nem ajánlanám!</option>
@@ -38,11 +39,11 @@
 				</select>
 
 				<div class="form-group mb-5">
-					<textarea class="form-control" id="summary" rows="3" name="summary" placeholder="Összegzés írása.."></textarea>
+					<textarea class="form-control" id="summary" rows="3" name="summary" placeholder="Összegzés írása.." required="required"></textarea>
 				</div>
 
-				<select class="form-select mb-5" aria-label="Default select example" name="templateId">
-					<option selected disabled>Sablon kiválasztsa</option>
+				<select class="form-select mb-5" aria-label="Default select example" name="templateId" required="required">
+					<option selected disabled value="">Sablon kiválasztsa</option>
 					<option value=1>1</option>
 					<option value=2>2</option>
 					<option value=3>3</option>

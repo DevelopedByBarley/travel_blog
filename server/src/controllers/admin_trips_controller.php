@@ -2,6 +2,7 @@
 
 
 
+
 function adminTripsHandler()
 {
     $pdo = getConnection();
@@ -22,12 +23,14 @@ function adminTripsHandler()
 
 function tripFormHandler()
 {
+
     checkIsAdminLoggedInOrRedirect();
     $adminId = $_SESSION["adminId"];
     echo render("wrapper.php", [
         "content" => render("pages/admin/admin_dashboard.php", [
             "innerContent" => render("pages/admin/trip_form.php", [
-                "adminId" => (int)$adminId
+                "adminId" => (int)$adminId,
+
             ])
         ])
     ]);
@@ -35,10 +38,6 @@ function tripFormHandler()
 
 function adminAddTripHandler()
 {
-    if (!isset($_POST["title"]) || !isset($_POST["description"]) || !isset($_POST["content"]) || !isset($_POST["time"]) || !isset($_POST["ratings"])  || empty($_FILES["files"]["name"][0])) {
-        header("Location: /admin/new-trip?isFailed=1");
-        return;
-    }
 
 
     $files = transformToSingleFiles($_FILES["files"]);
@@ -102,7 +101,7 @@ function adminTripSingleHandler()
     $tripContents = json_decode($trip["content"], true);
     $tripContentSchema = setTripContentsToSchema($tripContents);
     $ratingMessage = convertRatingToMessage((int)$trip["ratings"]);
-    
+
 
     $ratings = [
         "stars" => array_fill(0, (int)$trip["ratings"], ""),
@@ -124,19 +123,21 @@ function adminTripSingleHandler()
 function editTripFormHandler()
 {
     $pdo = getConnection();
-    $stmt = $pdo->prepare("SELECT `images` FROM `trips` WHERE id = ?");
+    $stmt = $pdo->prepare("SELECT * FROM `trips` WHERE id = ?");
     $stmt->execute([
         $_GET["id"] ?? ""
     ]);
-    $data = $stmt->fetch(PDO::FETCH_ASSOC);
-    $prevImages = base64_encode($data["images"]);
+    $trip = $stmt->fetch(PDO::FETCH_ASSOC);
+    $prevImages = base64_encode($trip["images"]);
+
 
 
     echo render("wrapper.php", [
         "content" => render("pages/admin/admin_dashboard.php", [
             "innerContent" => render("pages/admin/admin_edit_trip_form.php", [
                 "prevImages" => $prevImages,
-                "id" => $_GET["id"]
+                "id" => $_GET["id"],
+                "trip" => $trip  
             ])
         ])
     ]);
@@ -151,7 +152,6 @@ function editTripHandler()
 
     if (!empty($decoded)) {
         foreach ($decoded as $prevImage) {
-            var_dump($prevImage);
             unlink("./public/images/" . $prevImage);
         }
     }
@@ -198,23 +198,6 @@ function editTripHandler()
 
 
 
-function setTripContentsToSchema($schema)
-{
-    $ret = [];
-    foreach ($schema as $key => $tripContents) {
-        $tripFields = array_values($tripContents);
-        $ret[] = [
-            "title" => $tripFields[0],
-            "paragraphs" => [
-                "paragraph_1" => $tripFields[1],
-                "paragraph_2" => $tripFields[2],
-                "paragraph_3" => $tripFields[3],
-            ]
-        ];
-    }
-
-    return $ret;
-}
 
 
 
@@ -234,3 +217,17 @@ function transformToSingleFiles($rawFiles)
     return $ret;
 }
 
+
+function getTripContentHandler()
+{
+    checkIsAdminLoggedInOrRedirect();
+    $pdo = getConnection();
+    $stmt = $pdo->prepare("SELECT `content` FROM `trips` WHERE id = ?");
+    $stmt->execute([$_GET["id"]]);
+    $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+    $tripContents = setTripContentsToSchema(json_decode($data["content"], true));
+
+    echo json_encode($tripContents);
+}

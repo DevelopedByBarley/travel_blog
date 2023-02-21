@@ -64,8 +64,16 @@ function getSingleTripHandler()
 
 function tripListHandler()
 {
+    $pdo = getConnection();
+    $stmt = $pdo->prepare("SELECT * FROM `trips`");
+    $stmt->execute();
+    $trips = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
     echo render("wrapper.php", [
-        "content" => render("pages/public/trip_list.php", [])
+        "content" => render("pages/public/trip_list.php", [
+            "trips" => $trips
+        ])
     ]);
 }
 

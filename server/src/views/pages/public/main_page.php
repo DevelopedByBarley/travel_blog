@@ -85,7 +85,7 @@
             </div>
         <?php endforeach ?>
     </div>
-    <a href="/tripList">
+    <a href="/trip-list">
         <button class="btn btn-outline-info text-light">További utak</button>
     </a>
 </div>

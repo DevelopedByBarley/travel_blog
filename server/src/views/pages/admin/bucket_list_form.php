@@ -4,11 +4,10 @@
             <h1>Bakancslista hozzáadása</h1>
             <form action="/admin/bucket-new" method="POST" enctype="multipart/form-data">
                 <div class="form-outline mb-4">
-                    <input type="text" id="form1Example1" class="form-control" placeholder="Cím" name="title" />
-                </div>
+                    <input type="text" id="form1Example1" class="form-control" placeholder="Cím" name="title" required/>
 
                 <div class="form-outline mb-4">
-                    <input type="file" id="form1Example2" class="form-control" name="file" />
+                    <input type="file" id="form1Example2" class="form-control" name="file" required/>
                 </div>
 
 

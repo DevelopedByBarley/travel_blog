@@ -30,11 +30,18 @@ function adminProfileHandler()
 function editAdminProfileFormHandler()
 {
 
+    $pdo = getConnection();
+    $stmt = $pdo -> prepare("SELECT * FROM `profile` WHERE profileId = ?");
+    $stmt->execute([$_GET["id"]]);
+    $profile = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
     echo render("wrapper.php", [
         "content" => render("pages/admin/admin_dashboard.php", [
             "innerContent" => render("pages/admin/admin_edit_profile_form.php", [
                 "prevImage" => $_GET["prevImage"] ?? null,
-                "id" => $_GET["id"]
+                "id" => $_GET["id"],
+                "profile" => $profile
             ])
         ])
     ]);
