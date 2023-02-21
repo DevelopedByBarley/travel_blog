@@ -1,4 +1,5 @@
 <?php
+require './helpers/saveImage.php';
 require './helpers/debug_console.php';
 require '../../database/getConnection.php';
 require './helpers/render.php';
@@ -23,6 +24,10 @@ $routes = [
         "/admin/new-trip" => "tripFormHandler",
         "/admin/delete-trip" => "deleteTripHandler",
         "/admin/edit-trip" => "editTripFormHandler",
+        "/admin/bucketList" => "bucketListHandler",
+        "/admin/bucket-form" => "bucketFormHandler",
+        "/admin/delete-bucket" => "deleteBucketHandler",
+        "/admin/edit-bucket" => "editBucketFormHandler",
     ],
     "POST" => [
         "/admin-register" => "adminRegisterHandler",
@@ -30,6 +35,8 @@ $routes = [
         "/admin/add-trip" => "adminAddTripHandler",
         "/admin/edit-trip" => "editTripHandler",
         "/admin/profile-edit" => "editAdminProfileHandler",
+        "/admin/bucket-new" => "newBucketHandler",
+        "/admin/bucket-edit" => "editBucketHandler"
     ]
 ];
 

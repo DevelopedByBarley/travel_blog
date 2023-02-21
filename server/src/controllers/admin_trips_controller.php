@@ -1,5 +1,7 @@
 <?php
 
+
+
 function adminTripsHandler()
 {
     $pdo = getConnection();
@@ -99,26 +101,8 @@ function adminTripSingleHandler()
     $trip = $stmt->fetch(PDO::FETCH_ASSOC);
     $tripContents = json_decode($trip["content"], true);
     $tripContentSchema = setTripContentsToSchema($tripContents);
-
-    switch ((int)$trip["ratings"]) {
-        case 1:
-            $ratingMessage = "Rossz élmény,  senkinek sem ajánlom!";
-            break;
-        case 2:
-            $ratingMessage = "Rossz volt, de rosszabbul is járhattam volna!";
-            break;
-        case 3:
-            $ratingMessage = "Nem volt rossz, de ha van más választásod nem ajánlanám!";
-            break;
-        case 4:
-            $ratingMessage = "Kellemes élmény volt, menj el havan rá lehetőséged!";
-            break;
-        case 5:
-            $ratingMessage = "Nagyszerű élmény volt, mindenképp menj el!";
-            break;
-        default:
-            null;
-    }
+    $ratingMessage = convertRatingToMessage((int)$trip["ratings"]);
+    
 
     $ratings = [
         "stars" => array_fill(0, (int)$trip["ratings"], ""),
@@ -233,29 +217,6 @@ function setTripContentsToSchema($schema)
 }
 
 
-// Save images!;
-
-
-
-
-
-function saveImage($file)
-{
-    $whiteList = [IMAGETYPE_JPEG, IMAGETYPE_GIF, IMAGETYPE_PNG];
-
-    if (!in_array(exif_imagetype($file["tmp_name"]), $whiteList)) return false;
-
-    $rand = uniqid(rand(), true);
-    $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
-
-    $originalFileName = $rand . '.' . $ext;
-    $directoryPath = "./public/images/";
-
-    file_put_contents($directoryPath . $originalFileName, file_get_contents($file["tmp_name"]));
-
-    return $originalFileName;
-}
-
 
 function transformToSingleFiles($rawFiles)
 {
@@ -272,3 +233,4 @@ function transformToSingleFiles($rawFiles)
     }
     return $ret;
 }
+

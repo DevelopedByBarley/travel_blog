@@ -29,10 +29,12 @@ function adminProfileHandler()
 
 function editAdminProfileFormHandler()
 {
+
     echo render("wrapper.php", [
         "content" => render("pages/admin/admin_dashboard.php", [
             "innerContent" => render("pages/admin/admin_edit_profile_form.php", [
-                "prevImage" => $_GET["prevImage"] ?? null
+                "prevImage" => $_GET["prevImage"] ?? null,
+                "id" => $_GET["id"]
             ])
         ])
     ]);
@@ -40,25 +42,8 @@ function editAdminProfileFormHandler()
 
 function editAdminProfileHandler()
 {
-
     if (isset($_GET["prevImage"])) unlink('./public/images/' . $_GET["prevImage"]);
-    saveProfileImage($_FILES["file"]);
-}
-
-
-function saveProfileImage($file)
-{
-    $whiteList = [IMAGETYPE_PNG, IMAGETYPE_JPEG, IMAGETYPE_GIF];
-
-    if (!in_array(exif_imagetype($file['tmp_name']), $whiteList)) return false;
-
-    $rand = uniqid(rand(), true);
-    $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
-
-    $originalFileName = $rand . '.' . $ext;
-    $directoryPath = "./public/images/";
-
-    $isMoveSuccess = file_put_contents($directoryPath . $originalFileName, file_get_contents($file["tmp_name"]));
+    $originalFileName = saveImage($_FILES["file"]);
 
     $pdo = getConnection();
     $stmt = $pdo->prepare("UPDATE `profile` SET `name` = ?, `email` = ?, `age` = ?, `profileImage` = ?, `editedAt` = ? WHERE `profile`.`profileId` = ?;");
@@ -68,8 +53,10 @@ function saveProfileImage($file)
         $_POST["age"],
         $originalFileName,
         time(),
-        0
+        (int)$_GET["id"]
     ]);
 
     header("Location: /admin/profile");
 }
+
+

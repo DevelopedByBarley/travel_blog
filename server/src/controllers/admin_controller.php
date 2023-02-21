@@ -1,7 +1,9 @@
 <?php
-require 'validators.php';
+require './validators/validators.php';
+require './helpers/convertRatingToMessage.php';
 require 'admin_trips_controller.php';
 require 'admin_profile_controller.php';
+require 'admin_bucket_list_controller.php';
 
 function adminHandler()
 {

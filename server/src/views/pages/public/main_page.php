@@ -95,11 +95,11 @@
     <div class="planned-trips mt-5 row">
         <h1 class="text-center mt-5">Bakancslista</h1>
         <p class="text-center mb-5">Amerre még nem jártam.</p>
-        <?php foreach ($params["bucketList"] as $index => $trip) : ?>
+        <?php foreach ($params["bucketList"] as $index => $listItem) : ?>
             <div class="col-sm-4 d-flex flex-column align-items-center justify-content-center mb-5">
-                <div class="img-bubble" style="background: url('../../../public/images/<?= unserialize($params["trips"][$index]["images"])[0] ?>') center center; background-size: cover;"></div>
+                <div class="img-bubble" style="background: url('../../../public/images/<?= $listItem["bucketImage"] ?>') center center; background-size: cover;"></div>
                 <div class="content mt-3">
-                    <h3><?= $trip["title"] ?></h3>
+                    <h3><?= $listItem["title"] ?></h3>
                 </div>
             </div>
         <?php endforeach ?>

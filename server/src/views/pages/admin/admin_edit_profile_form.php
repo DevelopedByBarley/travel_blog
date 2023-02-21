@@ -1,4 +1,4 @@
-<form action="/admin/profile-edit?prevImage=<?= $params["prevImage"] ?>" method="POST" enctype="multipart/form-data">
+<form action="/admin/profile-edit?prevImage=<?= $params["prevImage"] ?>&id=<?= $params["id"] ?>" method="POST" enctype="multipart/form-data">
     <!-- 2 column grid layout with text inputs for the first and last names -->
     <div class="row mb-4">
         <div class="col">

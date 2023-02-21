@@ -19,13 +19,17 @@ function homeHandler()
     $stmt->execute();
     $profile = $stmt->fetch(PDO::FETCH_ASSOC);
 
+    $stmt = $pdo->prepare("SELECT * FROM `bucketList`");
+    $stmt->execute();
+    $bucketList = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
     echo render("wrapper.php", [
         "content" => render("pages/public/main_page.php", [
             "profile" => $profile,
             "trips" => $trips,
             "carouselTrips" => array_splice($trips, 0, 3),
             "anotherTrips" => $anotherTrips,
-            "bucketList" => $trips
+            "bucketList" => $bucketList
         ])
     ]);
 }
@@ -33,7 +37,6 @@ function homeHandler()
 
 function getSingleTripHandler()
 {
-    checkIsAdminLoggedInOrRedirect();
 
     $pdo = getConnection();
     $stmt = $pdo->prepare("SELECT * FROM `trips` WHERE id = ?");
@@ -41,26 +44,7 @@ function getSingleTripHandler()
     $trip = $stmt->fetch(PDO::FETCH_ASSOC);
     $tripContents = json_decode($trip["content"], true);
     $tripContentSchema = setTripContentsToSchema($tripContents);
-
-    switch ((int)$trip["ratings"]) {
-        case 1:
-            $ratingMessage = "Rossz élmény,  senkinek sem ajánlom!";
-            break;
-        case 2:
-            $ratingMessage = "Rossz volt, de rosszabbul is járhattam volna!";
-            break;
-        case 3:
-            $ratingMessage = "Nem volt rossz, de ha van más választásod nem ajánlanám!";
-            break;
-        case 4:
-            $ratingMessage = "Kellemes élmény volt, menj el havan rá lehetőséged!";
-            break;
-        case 5:
-            $ratingMessage = "Nagyszerű élmény volt, mindenképp menj el!";
-            break;
-        default:
-            null;
-    }
+    $ratingMessage = convertRatingToMessage((int)$trip["ratings"]);
 
     $ratings = [
         "stars" => array_fill(0, (int)$trip["ratings"], ""),

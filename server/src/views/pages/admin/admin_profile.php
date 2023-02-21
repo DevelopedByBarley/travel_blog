@@ -11,7 +11,7 @@
             <h5><?= $params["admin"]["age"] ?> éves</h5>
             <h3>Utazások száma:</h3>
             <h5><?= $params["trips"] ?></h5>
-            <a href="/admin/profile-edit?prevImage=<?=$params["admin"]["profileImage"]?>">
+            <a href="/admin/profile-edit?prevImage=<?=$params["admin"]["profileImage"]?>&id=<?= $params["admin"]["profileId"]?>">
                 <div class="mt-5 btn btn-warning text-light">Profil Szerkesztése</div>
             </a>
         </div>
